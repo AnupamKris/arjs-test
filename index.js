@@ -15,12 +15,10 @@ function main() {
     const mtl = new THREE.MeshBasicMaterial({ color: 0xff0000 });
     const box = new THREE.Mesh(geom, mtl);
 
-    // Create the device orientation tracker
-    const deviceOrientationControls = new THREEx.DeviceOrientationControls(camera);
-
-    // Change this to a location close to you (e.g. 0.001 degrees of latitude north of you)
+    // Change this to a location 0.001 degrees of latitude north of you, so that you will face it
     arjs.add(box, -0.72, 51.051);
 
+    // Start the GPS
     arjs.startGps();
 
     requestAnimationFrame(render);
@@ -32,10 +30,6 @@ function main() {
             camera.aspect = aspect;
             camera.updateProjectionMatrix();
         }
-
-        // Update the scene using the latest sensor readings
-        deviceOrientationControls.update();
-
         cam.update();
         renderer.render(scene, camera);
         requestAnimationFrame(render);
